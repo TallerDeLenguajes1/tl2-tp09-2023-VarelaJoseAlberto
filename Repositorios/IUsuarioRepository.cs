@@ -1,7 +1,7 @@
 using System;
 using TP9.Models;
 
-namespace TP9.Repositorio
+namespace TP9.Repositorios
 {
     public interface IUsuarioRepository
     {

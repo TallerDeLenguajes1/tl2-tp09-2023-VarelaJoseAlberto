@@ -1,7 +1,5 @@
-using System.Data;
 using System.Data.SQLite;
 using TP9.Models;
-using TP9.Repositorio;
 
 namespace TP9.Repositorios
 {
@@ -70,7 +68,7 @@ namespace TP9.Repositorios
 
         public void EliminarUsuarioPorId(int idRecibe)
         {
-            var query = "DELETE FROM usuario WHERE id_usuario = @id_usuario";
+            var query = "DELETE FROM Usuario WHERE id_usuario = @id_usuario";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
