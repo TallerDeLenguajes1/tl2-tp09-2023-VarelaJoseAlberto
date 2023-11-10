@@ -15,7 +15,7 @@ namespace TP9.Controllers
             tareaRepository = new TareaRepository();
         }
 
-        [HttpPost("{idTablero}")]
+        [HttpPost]
         public ActionResult<Tarea> CrearTarea(int idTablero, Tarea nuevaTarea)
         {
             var tareaCreada = tareaRepository.CrearTarea(idTablero, nuevaTarea);
@@ -67,5 +67,35 @@ namespace TP9.Controllers
             tareaRepository.AsignarUsuarioATarea(idUsuario, idTarea);
             return Ok("Usuario asignado a tarea");
         }
+
+        [HttpPut("{id}/Nombre/{nombre}")]
+        public ActionResult ModificarNombreTarea(int id, string nombre)
+        {
+            var tareaExistente = tareaRepository.ObtenerTareaPorId(id);
+            if (tareaExistente == null)
+            {
+                return NotFound("Tarea no encontrada");
+            }
+
+            tareaExistente.NombreTarea = nombre;
+            var tareaModificada = tareaRepository.ModificarTarea(id, tareaExistente);
+
+            return Ok(tareaModificada);
+        }
+
+
+        [HttpPut("{id}/Estado/{estado}")]
+        public ActionResult<Tarea> ModificarEstadoTarea(int id, EstadoTarea estado)
+        {
+            var tareaExistente = tareaRepository.ObtenerTareaPorId(id);
+            if (tareaExistente != null)
+            {
+                tareaExistente.EstadoTarea = estado;
+                var tareaModificada = tareaRepository.ModificarTarea(id, tareaExistente);
+                return Ok(tareaModificada);
+            }
+            return NotFound("Tarea no encontrada");
+        }
+
     }
 }
